@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // import useFetch from '../hooks/useFetch';
 import Table from '../components/Table';
+import StarWarsContext from '../context/StarWarsContext';
 
 function Home() {
+  // const { data, error, isLoading } = useFetch('https://swapi.dev/api/planets');
   const [planetsAPI, setPlanetAPI] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setErrror] = useState(null);
-  // const { data, error, isLoading } = useFetch('https://swapi.dev/api/planets');
+  const { setSearchName } = useContext(StarWarsContext);
 
   const toSeek = async () => {
     try {
@@ -43,6 +45,17 @@ function Home() {
 
   return (
     <div>
+      <label htmlFor="nameFilter">
+        <input
+          type="text"
+          data-testid="name-filter"
+          id="nameFilter"
+          placeholder="Nos fale seu filme favorito"
+          onChange={ ({ target }) => {
+            setSearchName(target.value);
+          } }
+        />
+      </label>
       <Table
         planetsAPI={ planetsAPI }
       />

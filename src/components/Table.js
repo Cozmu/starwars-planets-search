@@ -3,8 +3,22 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function Table({ planetsAPI }) {
-  const { searchName } = useContext(StarWarsContext);
-  const lower = searchName.toLocaleLowerCase();
+  const { nameFilter, filtersCollection } = useContext(StarWarsContext);
+  const lower = nameFilter.toLocaleLowerCase();
+
+  // const filterArr = () => filtersCollection
+  //   .forEach(({ comparisonFilter, valueFilter, columnFilter }) => {
+  //     if (comparisonFilter === 'maior que') {
+  //       return ;
+  //     }
+  //     if (comparisonFilter === 'menor que') {
+
+  //     }
+  //     if (comparisonFilter === 'igual a') {
+
+  //     }
+  //   });
+
   return (
     <table>
       <thead>

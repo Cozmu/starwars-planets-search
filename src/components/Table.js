@@ -2,29 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
-function Table({ planetsAPI }) {
-  const { nameFilter, filtersCollection } = useContext(StarWarsContext);
-  const lower = nameFilter.toLocaleLowerCase();
-
-  const filtros = (planetas) => filtersCollection
-    .forEach(({ comparisonFilter, valueFilter, columnFilter }) => {
-      if (comparisonFilter === 'maior que') {
-        return planetas
-          .filter((e) => e[columnFilter] > valueFilter
-          && (e.name.toLowerCase().includes(lower)));
-      }
-      if (comparisonFilter === 'menor que') {
-        return planetas
-          .filter((e) => e[columnFilter] < valueFilter
-          && (e.name.toLowerCase().includes(lower)));
-      }
-      if (comparisonFilter === 'igual a') {
-        return planetas
-          .filter((e) => e[columnFilter] === valueFilter
-          && (e.name.toLowerCase().includes(lower)));
-      }
-      return planetas.filter((e) => e.name.toLowerCase().includes(lower));
-    });
+function Table() {
+  const { filterStorageAll } = useContext(StarWarsContext);
 
   return (
     <table>
@@ -46,8 +25,8 @@ function Table({ planetsAPI }) {
         </tr>
       </thead>
       <tbody>
-        {filtros(planetsAPI)
-          .map(({
+        {filterStorageAll
+          ?.map(({
             name, rotation_period: rotationPeriod,
             orbital_period: orbitalPeriod, diameter,
             climate, gravity, terrain, surface_water: surfaceWater, population, films,

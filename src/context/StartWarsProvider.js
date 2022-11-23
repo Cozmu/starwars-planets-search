@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import starWarsContext from './StarWarsContext';
 
 function StarWarsProvider({ children }) {

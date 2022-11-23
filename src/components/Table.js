@@ -6,18 +6,25 @@ function Table({ planetsAPI }) {
   const { nameFilter, filtersCollection } = useContext(StarWarsContext);
   const lower = nameFilter.toLocaleLowerCase();
 
-  // const filterArr = () => filtersCollection
-  //   .forEach(({ comparisonFilter, valueFilter, columnFilter }) => {
-  //     if (comparisonFilter === 'maior que') {
-  //       return ;
-  //     }
-  //     if (comparisonFilter === 'menor que') {
-
-  //     }
-  //     if (comparisonFilter === 'igual a') {
-
-  //     }
-  //   });
+  const filtros = (planetas) => filtersCollection
+    .forEach(({ comparisonFilter, valueFilter, columnFilter }) => {
+      if (comparisonFilter === 'maior que') {
+        return planetas
+          .filter((e) => e[columnFilter] > valueFilter
+          && (e.name.toLowerCase().includes(lower)));
+      }
+      if (comparisonFilter === 'menor que') {
+        return planetas
+          .filter((e) => e[columnFilter] < valueFilter
+          && (e.name.toLowerCase().includes(lower)));
+      }
+      if (comparisonFilter === 'igual a') {
+        return planetas
+          .filter((e) => e[columnFilter] === valueFilter
+          && (e.name.toLowerCase().includes(lower)));
+      }
+      return planetas.filter((e) => e.name.toLowerCase().includes(lower));
+    });
 
   return (
     <table>
@@ -39,7 +46,7 @@ function Table({ planetsAPI }) {
         </tr>
       </thead>
       <tbody>
-        {planetsAPI.filter((e) => e.name.toLowerCase().includes(lower))
+        {filtros(planetsAPI)
           .map(({
             name, rotation_period: rotationPeriod,
             orbital_period: orbitalPeriod, diameter,

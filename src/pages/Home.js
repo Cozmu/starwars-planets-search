@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
+import Filters from '../components/Filters';
 import Form from '../components/Form';
-// import useFetch from '../hooks/useFetch';
 import Table from '../components/Table';
 import StarWarsContext from '../context/StarWarsContext';
 
 function Home() {
   const { setPlanets } = useContext(StarWarsContext);
-  // const { data, error, isLoading } = useFetch('https://swapi.dev/api/planets');
-  // const [planetsAPI, setPlanetAPI] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setErrror] = useState(null);
 
@@ -47,6 +45,7 @@ function Home() {
   return (
     <div>
       <Form />
+      <Filters />
       <Table />
     </div>
   );

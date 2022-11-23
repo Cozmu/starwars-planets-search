@@ -9,7 +9,9 @@ function StarWarsProvider({ children }) {
     comparisonFilter: 'maior que',
     columnFilter: 'population' });
   const [nameFilter, setNameFilter] = useState('');
-  const [filtersCollection, setFiltersCollection] = useState([]);
+  const [filtersCollection, setFiltersCollection] = useState({
+    filterByNumericValues: [],
+  });
   const [filterStorage, setfilterStorage] = useState([]);
   const [filterStorageAll, setfilterStorageAll] = useState([]);
 
@@ -23,18 +25,19 @@ function StarWarsProvider({ children }) {
 
   useEffect(() => {
     let intermediario = planets;
-    filtersCollection.forEach(({ comparisonFilter, valueFilter, columnFilter }) => {
-      if (comparisonFilter === 'maior que') {
-        intermediario = intermediario
-          .filter((e) => e[columnFilter] > +valueFilter);
-      } else if (comparisonFilter === 'menor que') {
-        intermediario = intermediario
-          .filter((e) => e[columnFilter] < +valueFilter);
-      } else if (comparisonFilter === 'igual a') {
-        intermediario = intermediario
-          .filter((e) => +e[columnFilter] === +valueFilter);
-      }
-    });
+    filtersCollection.filterByNumericValues
+      .forEach(({ comparisonFilter, valueFilter, columnFilter }) => {
+        if (comparisonFilter === 'maior que') {
+          intermediario = intermediario
+            .filter((e) => e[columnFilter] > +valueFilter);
+        } else if (comparisonFilter === 'menor que') {
+          intermediario = intermediario
+            .filter((e) => e[columnFilter] < +valueFilter);
+        } else if (comparisonFilter === 'igual a') {
+          intermediario = intermediario
+            .filter((e) => +e[columnFilter] === +valueFilter);
+        }
+      });
     setfilterStorage(intermediario);
   }, [filtersCollection, planets]);
 
@@ -45,7 +48,10 @@ function StarWarsProvider({ children }) {
   }, [nameFilter, filterStorage]);
 
   const addFilter = () => {
-    setFiltersCollection([...filtersCollection, theFilters]);
+    setFiltersCollection({
+      ...filtersCollection,
+      filterByNumericValues: [...filtersCollection.filterByNumericValues, theFilters],
+    });
   };
 
   const values = useMemo(() => ({

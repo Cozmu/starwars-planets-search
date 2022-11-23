@@ -5,14 +5,15 @@ function Filters() {
   const { filtersCollection } = useContext(StarWarsContext);
   return (
     <div>
-      {filtersCollection.map(({ valueFilter, comparisonFilter, columnFilter }, i) => (
-        <section
-          key={ i }
-          className="filtro"
-        >
-          <p>{`${columnFilter} ${comparisonFilter} ${valueFilter}`}</p>
-        </section>
-      ))}
+      {filtersCollection.filterByNumericValues
+        .map(({ valueFilter, comparisonFilter, columnFilter }, i) => (
+          <section
+            key={ i }
+            className="filtro"
+          >
+            <p>{`${columnFilter} ${comparisonFilter} ${valueFilter}`}</p>
+          </section>
+        ))}
     </div>
   );
 }

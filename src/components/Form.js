@@ -6,7 +6,8 @@ function Form() {
     handleChange,
     setNameFilter,
     theFilters,
-    addFilter } = useContext(StarWarsContext);
+    addFilter,
+    options } = useContext(StarWarsContext);
 
   return (
     <form>
@@ -27,11 +28,13 @@ function Form() {
         data-testid="column-filter"
         onChange={ handleChange }
       >
-        <option>population</option>
-        <option>orbital_period</option>
-        <option>diameter</option>
-        <option>rotation_period</option>
-        <option>surface_water</option>
+        {options.map((el) => (
+          <option
+            key={ el }
+          >
+            {el}
+          </option>
+        ))}
       </select>
       <select
         name="comparisonFilter"

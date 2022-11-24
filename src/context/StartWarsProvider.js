@@ -2,6 +2,10 @@ import PropTypes from 'prop-types';
 import { useMemo, useState, useEffect } from 'react';
 import starWarsContext from './StarWarsContext';
 
+const opt = ['population',
+  'orbital_period', 'diameter',
+  'rotation_period', 'surface_water'];
+
 function StarWarsProvider({ children }) {
   const [planets, setPlanets] = useState([]);
   const [theFilters, setTheFilters] = useState({
@@ -14,6 +18,7 @@ function StarWarsProvider({ children }) {
   });
   const [filterStorage, setfilterStorage] = useState([]);
   const [filterStorageAll, setfilterStorageAll] = useState([]);
+  const [options, setOpitions] = useState(opt);
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -47,11 +52,38 @@ function StarWarsProvider({ children }) {
       .filter((e) => e.name.toLowerCase().includes(lower)));
   }, [nameFilter, filterStorage]);
 
+  useEffect(() => {
+    const filtered = filtersCollection.filterByNumericValues.map((e) => e.columnFilter);
+    const newOptions = options.filter((e) => !filtered.includes(e));
+    setOpitions(newOptions);
+    setTheFilters({
+      ...theFilters,
+      columnFilter: newOptions[0],
+    });
+  }, [filtersCollection]);
+
   const addFilter = () => {
     setFiltersCollection({
       ...filtersCollection,
       filterByNumericValues: [...filtersCollection.filterByNumericValues, theFilters],
     });
+  };
+
+  const remuveFilter = (filtroClicado) => {
+    console.log(filtroClicado);
+    const newFilters = filtersCollection.filterByNumericValues
+      .filter((e) => e.columnFilter !== filtroClicado);
+
+    console.log(newFilters);
+    setFiltersCollection({
+      ...filtersCollection,
+      filterByNumericValues: [newFilters],
+    });
+    const verificaOptions = options.some((e) => !filtroClicado.includes(e));
+    console.log(verificaOptions);
+    if (verificaOptions) {
+      setOpitions([...options, filtroClicado]);
+    }
   };
 
   const values = useMemo(() => ({
@@ -63,11 +95,14 @@ function StarWarsProvider({ children }) {
     filtersCollection,
     setPlanets,
     filterStorageAll,
+    options,
+    remuveFilter,
   }), [
     theFilters,
     filtersCollection,
     nameFilter,
     filterStorageAll,
+    options,
   ]);
 
   return (

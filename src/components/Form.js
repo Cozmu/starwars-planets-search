@@ -7,7 +7,8 @@ function Form() {
     setNameFilter,
     theFilters,
     addFilter,
-    options } = useContext(StarWarsContext);
+    options,
+    remuveAllFilters } = useContext(StarWarsContext);
 
   return (
     <form>
@@ -61,6 +62,13 @@ function Form() {
         onClick={ () => addFilter() }
       >
         Adicionar Filtro
+      </button>
+      <button
+        data-testid="button-remove-filters"
+        type="button"
+        onClick={ remuveAllFilters }
+      >
+        Remover todas filtragens
       </button>
     </form>
   );

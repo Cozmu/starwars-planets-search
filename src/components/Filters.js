@@ -6,7 +6,7 @@ function Filters() {
   return (
     <div>
       {filtersCollection.filterByNumericValues
-        .map(({ valueFilter, comparisonFilter, columnFilter }, i) => (
+        ?.map(({ valueFilter, comparisonFilter, columnFilter }, i) => (
           <section
             key={ i }
             data-testid="filter"

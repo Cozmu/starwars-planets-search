@@ -70,20 +70,25 @@ function StarWarsProvider({ children }) {
   };
 
   const remuveFilter = (filtroClicado) => {
-    console.log(filtroClicado);
     const newFilters = filtersCollection.filterByNumericValues
       .filter((e) => e.columnFilter !== filtroClicado);
 
-    console.log(newFilters);
     setFiltersCollection({
       ...filtersCollection,
-      filterByNumericValues: [newFilters],
+      filterByNumericValues: newFilters,
     });
     const verificaOptions = options.some((e) => !filtroClicado.includes(e));
-    console.log(verificaOptions);
     if (verificaOptions) {
       setOpitions([...options, filtroClicado]);
     }
+  };
+
+  const remuveAllFilters = () => {
+    setFiltersCollection({
+      ...filtersCollection,
+      filterByNumericValues: [],
+    });
+    setOpitions(opt);
   };
 
   const values = useMemo(() => ({
@@ -97,6 +102,7 @@ function StarWarsProvider({ children }) {
     filterStorageAll,
     options,
     remuveFilter,
+    remuveAllFilters,
   }), [
     theFilters,
     filtersCollection,

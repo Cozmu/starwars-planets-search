@@ -8,7 +8,19 @@ function Form() {
     theFilters,
     addFilter,
     options,
-    remuveAllFilters } = useContext(StarWarsContext);
+    remuveAllFilters,
+    setFiltersCollection,
+    filtersCollection } = useContext(StarWarsContext);
+
+  const handleChageColumnSort = ({ target }) => {
+    setFiltersCollection({
+      ...filtersCollection,
+      order: {
+        ...filtersCollection.order,
+        sort: target.value,
+      },
+    });
+  };
 
   return (
     <form>
@@ -69,6 +81,51 @@ function Form() {
         onClick={ remuveAllFilters }
       >
         Remover todas filtragens
+      </button>
+      <label htmlFor="columnSortAsc">
+        <input
+          type="radio"
+          data-testid="column-sort-input-asc"
+          id="columnSortAsc"
+          name="columnSort"
+          onChange={ handleChageColumnSort }
+          value="ASC"
+        />
+        ASC
+      </label>
+      <label htmlFor="columnSortDesc">
+        <input
+          type="radio"
+          data-testid="column-sort-input-desc"
+          id="columnSortDesc"
+          name="columnSort"
+          onChange={ handleChageColumnSort }
+          value="DESC"
+        />
+        DESC
+      </label>
+      <select
+        data-testid="column-sort"
+        onChange={ ({ target }) => {
+          setFiltersCollection({
+            ...filtersCollection,
+            order: {
+              ...filtersCollection.order,
+              column: target.value,
+            },
+          });
+        } }
+      >
+        <option>population</option>
+        <option>orbital_period</option>
+        <option>diameter</option>
+        <option>rotation_period</option>
+        <option>surface_water</option>
+      </select>
+      <button
+        type="button"
+      >
+        Ordenar
       </button>
     </form>
   );

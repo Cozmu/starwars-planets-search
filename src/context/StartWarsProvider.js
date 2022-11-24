@@ -14,6 +14,7 @@ function StarWarsProvider({ children }) {
     columnFilter: 'population' });
   const [nameFilter, setNameFilter] = useState('');
   const [filtersCollection, setFiltersCollection] = useState({
+    order: { column: 'population', sort: 'ASC' },
     filterByNumericValues: [],
   });
   const [filterStorage, setfilterStorage] = useState([]);
@@ -103,6 +104,7 @@ function StarWarsProvider({ children }) {
     options,
     remuveFilter,
     remuveAllFilters,
+    setFiltersCollection,
   }), [
     theFilters,
     filtersCollection,

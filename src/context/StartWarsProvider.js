@@ -21,6 +21,13 @@ function StarWarsProvider({ children }) {
   const [filterStorageAll, setfilterStorageAll] = useState([]);
   const [options, setOpitions] = useState(opt);
 
+  const ordination = () => planets.sort((a, b) => {
+    if (filtersCollection.order.sort === 'ASC') {
+      return a[filtersCollection.order.column] - b[filtersCollection.order.column];
+    }
+    return b[filtersCollection.order.column] - a[filtersCollection.order.column];
+  });
+
   const handleChange = ({ target }) => {
     const { name, value } = target;
     setTheFilters({
@@ -105,6 +112,7 @@ function StarWarsProvider({ children }) {
     remuveFilter,
     remuveAllFilters,
     setFiltersCollection,
+    ordination,
   }), [
     theFilters,
     filtersCollection,

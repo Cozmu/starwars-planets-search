@@ -10,7 +10,8 @@ function Form() {
     options,
     remuveAllFilters,
     setFiltersCollection,
-    filtersCollection } = useContext(StarWarsContext);
+    filtersCollection,
+    ordination } = useContext(StarWarsContext);
 
   const handleChageColumnSort = ({ target }) => {
     setFiltersCollection({
@@ -124,6 +125,8 @@ function Form() {
       </select>
       <button
         type="button"
+        onClick={ ordination }
+        data-testid="column-sort-button"
       >
         Ordenar
       </button>

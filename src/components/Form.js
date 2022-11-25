@@ -11,15 +11,13 @@ function Form() {
     remuveAllFilters,
     setFiltersCollection,
     filtersCollection,
-    ordination } = useContext(StarWarsContext);
+    theOrder,
+    setTheOrder } = useContext(StarWarsContext);
 
   const handleChageColumnSort = ({ target }) => {
-    setFiltersCollection({
-      ...filtersCollection,
-      order: {
-        ...filtersCollection.order,
-        sort: target.value,
-      },
+    setTheOrder({
+      ...theOrder,
+      sort: target.value,
     });
   };
 
@@ -106,14 +104,12 @@ function Form() {
         DESC
       </label>
       <select
+        name="column"
         data-testid="column-sort"
         onChange={ ({ target }) => {
-          setFiltersCollection({
-            ...filtersCollection,
-            order: {
-              ...filtersCollection.order,
-              column: target.value,
-            },
+          setTheOrder({
+            ...theOrder,
+            [target.name]: target.value,
           });
         } }
       >
@@ -125,7 +121,14 @@ function Form() {
       </select>
       <button
         type="button"
-        onClick={ ordination }
+        onClick={ () => {
+          setFiltersCollection({
+            ...filtersCollection,
+            order: {
+              ...theOrder,
+            },
+          });
+        } }
         data-testid="column-sort-button"
       >
         Ordenar

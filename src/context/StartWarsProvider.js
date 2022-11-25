@@ -60,7 +60,6 @@ function StarWarsProvider({ children }) {
             .filter((e) => +e[columnFilter] === +valueFilter);
         }
       });
-    console.log(filtersCollection.order);
     intermediario = ordination(intermediario);
     setfilterStorage(intermediario);
   }, [filtersCollection, planets]);

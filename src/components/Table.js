@@ -4,7 +4,6 @@ import StarWarsContext from '../context/StarWarsContext';
 
 function Table() {
   const { filterStorageAll } = useContext(StarWarsContext);
-
   return (
     <table>
       <thead>
@@ -33,7 +32,11 @@ function Table() {
             created, edited, url,
           }, i) => (
             <tr key={ i }>
-              <td>{name}</td>
+              <td
+                data-testid="planet-name"
+              >
+                {name}
+              </td>
               <td>{rotationPeriod}</td>
               <td>{orbitalPeriod}</td>
               <td>{diameter}</td>

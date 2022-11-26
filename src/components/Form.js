@@ -11,13 +11,15 @@ function Form() {
     remuveAllFilters,
     setFiltersCollection,
     filtersCollection,
-    theOrder,
     setTheOrder } = useContext(StarWarsContext);
 
   const handleChageColumnSort = ({ target }) => {
-    setTheOrder({
-      ...theOrder,
-      sort: target.value,
+    setFiltersCollection({
+      ...filtersCollection,
+      order: {
+        ...filtersCollection.order,
+        sort: target.value,
+      },
     });
   };
 
@@ -107,9 +109,12 @@ function Form() {
         name="column"
         data-testid="column-sort"
         onChange={ ({ target }) => {
-          setTheOrder({
-            ...theOrder,
-            [target.name]: target.value,
+          setFiltersCollection({
+            ...filtersCollection,
+            order: {
+              ...filtersCollection.order,
+              column: target.value,
+            },
           });
         } }
       >
@@ -122,12 +127,9 @@ function Form() {
       <button
         type="button"
         onClick={ () => {
-          setFiltersCollection({
-            ...filtersCollection,
-            order: {
-              ...theOrder,
-            },
-          });
+          setTheOrder(
+            filtersCollection.order,
+          );
         } }
         data-testid="column-sort-button"
       >

@@ -20,9 +20,7 @@ function StarWarsProvider({ children }) {
   const [filterStorage, setfilterStorage] = useState([]);
   const [filterStorageAll, setfilterStorageAll] = useState([]);
   const [options, setOpitions] = useState(opt);
-  const [theOrder, setTheOrder] = useState({
-    column: 'population', sort: 'ASC',
-  });
+  const [theOrder, setTheOrder] = useState({});
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -32,18 +30,25 @@ function StarWarsProvider({ children }) {
     });
   };
 
-  const ordination = (data) => data.sort((a, b) => {
-    if (filtersCollection.order.sort === 'ASC') {
-      if (a[filtersCollection.order.column] === 'unknown') {
-        return Infinity - b[filtersCollection.order.column];
+  const ordination = () => {
+    const newFilter = filterStorageAll.sort((a, b) => {
+      if (filtersCollection.order.sort === 'ASC') {
+        if (a[filtersCollection.order.column] === 'unknown') {
+          return Infinity - b[filtersCollection.order.column];
+        }
+        if (b[filtersCollection.order.column] === 'unknown') {
+          return a[filtersCollection.order.column] - Infinity;
+        }
+        return a[filtersCollection.order.column] - b[filtersCollection.order.column];
       }
-      if (b[filtersCollection.order.column] === 'unknown') {
-        return a[filtersCollection.order.column] - Infinity;
-      }
-      return a[filtersCollection.order.column] - b[filtersCollection.order.column];
-    }
-    return b[filtersCollection.order.column] - a[filtersCollection.order.column];
-  });
+      return b[filtersCollection.order.column] - a[filtersCollection.order.column];
+    });
+    setfilterStorageAll([...newFilter]);
+  };
+
+  useEffect(() => {
+    ordination();
+  }, [theOrder]);
 
   useEffect(() => {
     let intermediario = planets;
@@ -60,7 +65,6 @@ function StarWarsProvider({ children }) {
             .filter((e) => +e[columnFilter] === +valueFilter);
         }
       });
-    intermediario = ordination(intermediario);
     setfilterStorage(intermediario);
   }, [filtersCollection, planets]);
 
@@ -123,14 +127,12 @@ function StarWarsProvider({ children }) {
     remuveAllFilters,
     setFiltersCollection,
     setTheOrder,
-    theOrder,
   }), [
     theFilters,
     filtersCollection,
     nameFilter,
     filterStorageAll,
     options,
-    theOrder,
   ]);
 
   return (

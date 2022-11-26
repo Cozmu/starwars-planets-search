@@ -3,6 +3,7 @@ import Filters from '../components/Filters';
 import Form from '../components/Form';
 import Table from '../components/Table';
 import StarWarsContext from '../context/StarWarsContext';
+// import deleteProperty from '../tests/helpers/Helper';
 
 function Home() {
   const { setPlanets } = useContext(StarWarsContext);
@@ -14,6 +15,7 @@ function Home() {
       const endPoint = 'https://swapi.dev/api/planets';
       const response = await fetch(endPoint);
       const data = await response.json();
+      // const filter = deleteProperty(data.results, 'residents');
       const filter = data.results.filter((e) => delete e.residents);
       setPlanets(filter);
     } catch (e) {

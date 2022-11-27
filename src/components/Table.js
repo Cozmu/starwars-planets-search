@@ -46,7 +46,14 @@ function Table() {
               <td>{surfaceWater}</td>
               <td>{population}</td>
               <td>
-                {films}
+                {films.map((e, index) => (
+                  <p
+                    key={ index }
+                  >
+                    {e}
+
+                  </p>
+                ))}
               </td>
               <td>{created}</td>
               <td>{edited}</td>

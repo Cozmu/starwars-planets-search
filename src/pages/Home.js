@@ -3,6 +3,8 @@ import Filters from '../components/Filters';
 import Form from '../components/Form';
 import Table from '../components/Table';
 import StarWarsContext from '../context/StarWarsContext';
+import Header from '../components/Header';
+import '../style/Home.css';
 // import deleteProperty from '../tests/helpers/Helper';
 
 function Home() {
@@ -31,7 +33,7 @@ function Home() {
 
   if (isLoading) {
     return (
-      <div>
+      <div className="loading-container">
         <h1>Carregando...</h1>
       </div>
     );
@@ -46,9 +48,12 @@ function Home() {
 
   return (
     <div>
-      <Form />
-      <Filters />
-      <Table />
+      <Header />
+      <main className="conteudo-container">
+        <Form />
+        <Filters />
+        <Table />
+      </main>
     </div>
   );
 }

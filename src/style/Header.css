@@ -1,0 +1,21 @@
+.header-container {
+  height: 703px;
+  margin: auto;
+  position: relative;
+  width: 950px;
+}
+
+.elipse-container {
+  height: 703px;
+  position: absolute;
+  top: 0;
+  width: 950px;
+}
+
+.logo-container {
+  align-items: center;
+  display: flex;
+  height: 500px;
+  justify-content: center;
+  width: 950px;
+}

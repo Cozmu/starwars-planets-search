@@ -34,7 +34,7 @@ function Form() {
             data-testid="name-filter"
             id="nameFilter"
             name="nameFilter"
-            placeholder="Nos fale seu filme favorito"
+            placeholder="Nos fale seu planeta favorito"
             onChange={ ({ target }) => {
               setNameFilter(target.value);
             } }

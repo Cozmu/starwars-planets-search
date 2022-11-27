@@ -1,0 +1,19 @@
+.table-container {
+  border-collapse: collapse;
+}
+
+.table-header tr {
+  background-color: rgb(46, 48, 53);
+  height: 70px;
+}
+
+.table-header th {
+  padding: 10px;
+}
+
+.table-body td {
+  border-bottom: 1px solid rgb(174, 174, 174);
+  color: rgb(174, 174, 174);
+  padding: 5px;
+  text-align: center;
+}

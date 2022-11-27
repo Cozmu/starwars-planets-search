@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
+import '../style/Table.css';
 
 function Table() {
   const { filterStorageAll } = useContext(StarWarsContext);
   return (
-    <table>
-      <thead>
+    <table className="table-container">
+      <thead className="table-header">
         <tr>
           <th>Name</th>
           <th>Rotation Period</th>
@@ -23,7 +24,7 @@ function Table() {
           <th>URL</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="table-body">
         {filterStorageAll
           ?.map(({
             name, rotation_period: rotationPeriod,

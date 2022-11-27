@@ -3,7 +3,7 @@
 }
 
 .table-header tr {
-  background-color: rgb(46, 48, 53);
+  background-color: rgba(46, 48, 53, 0.73);
   height: 70px;
 }
 
@@ -13,7 +13,6 @@
 
 .table-body td {
   border-bottom: 1px solid rgb(174, 174, 174);
-  color: rgb(174, 174, 174);
   padding: 5px;
   text-align: center;
 }

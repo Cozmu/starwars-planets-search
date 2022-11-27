@@ -1,0 +1,31 @@
+.filters-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  padding: 30px;
+}
+
+.filters {
+  align-items: center;
+  background-color: rgba(207, 219, 213, 0.2);
+  border-radius: 5px;
+  display: flex;
+  padding: 10px;
+}
+
+.removed-filters {
+  align-items: center;
+  background-color: rgba(207, 219, 213, 0);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  height: 20px;
+  margin-left: 15px;
+  width: 20px;
+}
+
+.removed-icon {
+  color: rgb(239, 35, 60);
+  font-size: larger;
+  width: 100%;
+}

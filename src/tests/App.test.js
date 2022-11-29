@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import App from '../App';
 import planetsAPI from './helpers/MockPlanets'
-import MockFetch from './helpers/MockFetch'
+import StarWarsProvider from '../context/StartWarsProvider';
 
 afterEach(() => jest.clearAllMocks()); 
 
@@ -14,7 +14,7 @@ describe('Form coverage' , () => {
     global.fetch = jest.fn(async () => ({
       json: async () => planetsAPI
     })); 
-    render(<App />);
+    render(<StarWarsProvider><App /></StarWarsProvider>);
      await waitForElementToBeRemoved(() =>
       screen.queryByText(/Carregando.../i),
      )

@@ -1,7 +1,7 @@
-import React from 'react';
-import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { wait } from '@testing-library/user-event/dist/utils';
 import App from '../App';
-import planetsAPI from './helpers/MockPlanets'
+import testData from '../../cypress/mocks/testData'
 import StarWarsProvider from '../context/StartWarsProvider';
 
 afterEach(() => jest.clearAllMocks()); 
@@ -9,29 +9,29 @@ afterEach(() => jest.clearAllMocks());
 describe('Form coverage' , () => {
   it('Verifique se os inputs são renderizados corretamente' , async () => {
     // global.fetch = jest.fn(() => Promise.resolve({
-    //   json: () => Promise.resolve(planetsAPI),
+    //   json: () => Promise.resolve(testData),
     // }));
-    global.fetch = jest.fn(async () => ({
-      json: async () => planetsAPI
-    })); 
+    // global.fetch = jest.fn(async () => ({
+    //   json: async () => testData
+    // })); 
     render(<StarWarsProvider><App /></StarWarsProvider>);
-     await waitForElementToBeRemoved(() =>
-      screen.queryByText(/Carregando.../i),
-     )
-    await waitFor(async () => {
+    // await waitForElementToBeRemoved(() =>
+    //   screen.queryByText(/Carregando.../i),
+    // )
+    await wait(async () => {
       expect(screen.queryByText('Tatooine')).toBeInTheDocument();
-    }, { timeout: 3000 }) 
+       expect(screen.queryByTestId('name-filter')).toBeInTheDocument();
+       expect(screen.queryByTestId('column-filter')).toBeInTheDocument();
+       expect(screen.queryByTestId('comparison-filter')).toBeInTheDocument();
+       expect(screen.queryByTestId('value-filter')).toBeInTheDocument();
+       expect(screen.queryByTestId('button-filter')).toBeInTheDocument();
+       expect(screen.queryByTestId('column-sort')).toBeInTheDocument();
+       expect(screen.queryByTestId('column-sort-input-asc')).toBeInTheDocument();
+       expect(screen.queryByTestId('column-sort-input-desc')).toBeInTheDocument();
+       expect(screen.queryByTestId('column-sort')).toBeInTheDocument();
+       expect(screen.queryByTestId('column-sort-button')).toBeInTheDocument();
+    })
     
-    // expect( await screen.findByTestId('name-filter')).toBeInTheDocument();
-    // expect(screen.getByTestId('column-filter')).toBeInTheDocument();
-    // expect(screen.getByTestId('comparison-filter')).toBeInTheDocument();
-    // expect(screen.getByTestId('value-filter')).toBeInTheDocument();
-    // expect(screen.getByTestId('button-filter')).toBeInTheDocument();
-    // expect(screen.getByTestId('column-sort')).toBeInTheDocument();
-    // expect(screen.getByTestId('column-sort-input-asc')).toBeInTheDocument();
-    // expect(screen.getByTestId('column-sort-input-desc')).toBeInTheDocument();
-    // expect(screen.getByTestId('column-sort')).toBeInTheDocument();
-    // expect(screen.getByTestId('column-sort-button')).toBeInTheDocument();
   })
  
 })

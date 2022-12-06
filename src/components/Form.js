@@ -42,9 +42,6 @@ function Form() {
         </label>
         <button
           type="button"
-          onClick={ () => {
-            console.log('XD');
-          } }
         >
           <FaSearch className="search-icon" />
         </button>

@@ -19,6 +19,7 @@ function Filters() {
             </p>
             <button
               type="button"
+              data-testid="removed-filters"
               className="removed-filters"
               onClick={ () => remuveFilter(columnFilter) }
             >

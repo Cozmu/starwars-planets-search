@@ -2,6 +2,7 @@
   border-collapse: collapse;
   min-width: 1277.75px;
   overflow-x: auto; /* nao funciona essa merda */
+  width: 100%;
 }
 
 .table-header tr {

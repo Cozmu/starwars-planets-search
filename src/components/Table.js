@@ -24,7 +24,10 @@ function Table() {
           <th>URL</th>
         </tr>
       </thead>
-      <tbody className="table-body">
+      <tbody
+        data-testid="table-body"
+        className="table-body"
+      >
         {filterStorageAll
           ?.map(({
             name, rotation_period: rotationPeriod,

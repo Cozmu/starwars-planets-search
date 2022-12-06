@@ -1,6 +1,4 @@
-import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
-import { wait } from '@testing-library/user-event/dist/utils';
-import App from '../App';
+import { render, screen, waitFor } from '@testing-library/react';
 import testData from '../../cypress/mocks/testData'
 import StarWarsProvider from '../context/StartWarsProvider';
 import userEvent from '@testing-library/user-event';
